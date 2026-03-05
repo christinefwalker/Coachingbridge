@@ -1,0 +1,258 @@
+<!-- ════════════════════════════════════════════════════════
+     blog.html  —  save as: blog/index.html
+     ════════════════════════════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Christine F. Walker</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav id="nav"><div class="nav-inner">
+    <a href="/" class="nav-logo">Christine F. Walker</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/blog" class="nav-link active">Blog</a>
+      <a href="/works" class="nav-link">Works</a>
+      <a href="/start" class="nav-link">Start Here</a>
+      <a href="/contact" class="nav-link">Contact</a>
+    </div>
+  </div></nav>
+
+  <div style="max-width:760px;margin:0 auto;padding:140px 32px 100px">
+    <p class="eyebrow">Writing</p>
+    <h1 class="page-title" style="margin-bottom:64px">The Blog</h1>
+    <div id="blog-posts">
+      <div class="skeleton-post"></div>
+      <div class="skeleton-post"></div>
+      <div class="skeleton-post"></div>
+      <div class="skeleton-post"></div>
+      <div class="skeleton-post"></div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/data.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/footer.js"></script>
+  <script>
+    fetchPosts(20).then(posts => renderPostList('blog-posts', posts, true));
+  </script>
+</body>
+</html>
+
+
+<!-- ════════════════════════════════════════════════════════
+     works.html  —  save as: works/index.html
+     ════════════════════════════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Works — Christine F. Walker</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav id="nav"><div class="nav-inner">
+    <a href="/" class="nav-logo">Christine F. Walker</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/blog" class="nav-link">Blog</a>
+      <a href="/works" class="nav-link active">Works</a>
+      <a href="/start" class="nav-link">Start Here</a>
+      <a href="/contact" class="nav-link">Contact</a>
+    </div>
+  </div></nav>
+
+  <div style="padding:140px 32px 100px;max-width:1100px;margin:0 auto">
+    <p class="eyebrow">Selected Work</p>
+    <h1 class="page-title">Projects & Campaigns</h1>
+    <p style="color:var(--muted);font-size:16px;line-height:1.7;max-width:520px;margin-bottom:64px">A mix of brand work, campaigns, facilitation, and frameworks — each built with intention.</p>
+    <div class="card-grid" id="works-grid"></div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/data.js"></script>
+  <script src="/js/works.js"></script>
+  <script src="/js/footer.js"></script>
+  <script>renderWorksGrid('works-grid');</script>
+</body>
+</html>
+
+
+<!-- ════════════════════════════════════════════════════════
+     start.html  —  save as: start/index.html
+     ════════════════════════════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start Here — Christine F. Walker</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav id="nav"><div class="nav-inner">
+    <a href="/" class="nav-logo">Christine F. Walker</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/blog" class="nav-link">Blog</a>
+      <a href="/works" class="nav-link">Works</a>
+      <a href="/start" class="nav-link active">Start Here</a>
+      <a href="/contact" class="nav-link">Contact</a>
+    </div>
+  </div></nav>
+
+  <div style="padding:140px 32px 100px">
+    <div class="form-wrap">
+      <p class="eyebrow">Let's Begin</p>
+      <h1 class="page-title">Start Here</h1>
+      <p class="page-sub">Tell me about what you're building. I'll read every word and reply within 48 hours.</p>
+
+      <div id="start-form">
+        <form name="start-project" method="POST" data-netlify="true" action="/thank-you">
+          <input type="hidden" name="form-name" value="start-project" />
+          <div class="form-field">
+            <label class="form-label">Your name *</label>
+            <input type="text" name="name" class="form-input" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label">Email address *</label>
+            <input type="email" name="email" class="form-input" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label">What are you working on? *</label>
+            <textarea name="project" class="form-textarea" rows="4" required></textarea>
+          </div>
+          <div class="form-field">
+            <label class="form-label">What kind of support?</label>
+            <select name="support" class="form-select">
+              <option value="">Select…</option>
+              <option>Facilitation / Workshops</option>
+              <option>Campaign strategy</option>
+              <option>Brand + community</option>
+              <option>Connector / matching</option>
+              <option>Not sure yet — let's talk</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Anything else?</label>
+            <textarea name="notes" class="form-textarea" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark btn-full">Send My Inquiry →</button>
+        </form>
+      </div>
+
+      <div style="margin-top:72px">
+        <h2 style="font-family:var(--ff);font-size:28px;font-weight:400;margin-bottom:40px">What happens next</h2>
+        <div class="next-step"><h3>01 — I read your note</h3><p>Within 48 hours. No auto-replies — just me.</p></div>
+        <div class="next-step"><h3>02 — We talk</h3><p>A 30-minute call if there's a fit. No pitch, no pressure.</p></div>
+        <div class="next-step"><h3>03 — We build a plan</h3><p>A simple proposal — or an honest referral if I'm not the right fit.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/data.js"></script>
+  <script src="/js/footer.js"></script>
+</body>
+</html>
+
+
+<!-- ════════════════════════════════════════════════════════
+     contact.html  —  save as: contact/index.html
+     ════════════════════════════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Christine F. Walker</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav id="nav"><div class="nav-inner">
+    <a href="/" class="nav-logo">Christine F. Walker</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/blog" class="nav-link">Blog</a>
+      <a href="/works" class="nav-link">Works</a>
+      <a href="/start" class="nav-link">Start Here</a>
+      <a href="/contact" class="nav-link active">Contact</a>
+    </div>
+  </div></nav>
+
+  <div style="max-width:640px;margin:0 auto;padding:140px 32px 100px">
+    <p class="eyebrow">Get in Touch</p>
+    <h1 class="page-title">Contact</h1>
+    <p class="page-sub">For general questions, press, or anything that doesn't fit the intake form.</p>
+
+    <form name="contact" method="POST" data-netlify="true" action="/thank-you">
+      <input type="hidden" name="form-name" value="contact" />
+      <div class="form-field">
+        <label class="form-label">Name *</label>
+        <input type="text" name="name" class="form-input" required />
+      </div>
+      <div class="form-field">
+        <label class="form-label">Email *</label>
+        <input type="email" name="email" class="form-input" required />
+      </div>
+      <div class="form-field">
+        <label class="form-label">Message *</label>
+        <textarea name="message" class="form-textarea" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-dark btn-full">Send Message</button>
+    </form>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/data.js"></script>
+  <script src="/js/footer.js"></script>
+</body>
+</html>
+
+
+<!-- ════════════════════════════════════════════════════════
+     about.html  —  save as: about/index.html
+     ════════════════════════════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Christine F. Walker</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav id="nav"><div class="nav-inner">
+    <a href="/" class="nav-logo">Christine F. Walker</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/blog" class="nav-link">Blog</a>
+      <a href="/works" class="nav-link">Works</a>
+      <a href="/start" class="nav-link">Start Here</a>
+      <a href="/contact" class="nav-link">Contact</a>
+    </div>
+  </div></nav>
+
+  <div class="about-hero">
+    <div class="grain"></div>
+    <div style="max-width:680px;margin:0 auto;position:relative">
+      <p class="eyebrow">About</p>
+      <h1 class="about-quote">I believe the right conversation changes everything.</h1>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>I'm Christine — a facilitator, connector, and strategist who has spent years helping creative teams find clarity, momentum, and each other.</p>
+    <p>My work lives at the intersection of ideas and action. I design and run workshops that help people think better together. I match clients with collaborators, campaigns, and creative partners that fit. And I write about all of it here.</p>
+    <p>I work with a small number of clients at a time — because the work deserves that kind of attention.</p>
+    <div class="btn-row" style="margin-top:48px">
+      <a href="/start" class="btn btn-dark">Start a Project</a>
+      <a href="/blog" class="btn btn-outline">Read the Blog</a>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/data.js"></script>
+  <script src="/js/footer.js"></script>
+</body>
+</html>
