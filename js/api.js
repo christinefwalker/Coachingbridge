@@ -96,7 +96,7 @@ function renderWorksGrid(containerId, limit) {
 function renderFooter() {
   const el = document.getElementById('footer-placeholder');
   if (!el) return;
-  const links = [['About','/about'],['The Works','/works'],['Ecosystem','/ecosystem'],['Writing','/blog'],['Collaborate','/contact'],['Start Here','/start'],['Privacy','/privacy'],['Disclosures','/disclosures']];
+  const links = [['About','/about'],['The Works','/works'],['Ecosystem','/ecosystem'],['Lifestyle Design','/lifestyle'],['Writing','/blog'],['Collaborate','/contact'],['Start Here','/start'],['Privacy','/privacy'],['Disclosures','/disclosures']];
   el.innerHTML = `
     <footer role="contentinfo">
       <div class="footer-inner">
@@ -145,4 +145,45 @@ function generatePDF(name) {
   <div class="footer"><span>Creator Clarity Interview Blueprint</span><span>© ${new Date().getFullYear()} Squirrel Media LLC · christinefwalker.com</span></div>
   <script>window.onload=()=>window.print()<\/script></body></html>`);
   w.document.close();
+}
+
+/*
+ * Mobile navigation (progressive enhancement).
+ * The nav markup is hardcoded on every page; this injects a hamburger toggle
+ * into the existing .nav-inner so all pages get a working mobile menu without
+ * editing each page's markup. On desktop the toggle is hidden via CSS.
+ */
+function initMobileNav() {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const inner = nav.querySelector('.nav-inner');
+  const links = nav.querySelector('.nav-links');
+  if (!inner || !links || inner.querySelector('.nav-toggle')) return;
+
+  if (!links.id) links.id = 'nav-links';
+
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'nav-toggle';
+  toggle.setAttribute('aria-label', 'Toggle navigation menu');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-controls', links.id);
+  toggle.innerHTML = '<span></span><span></span><span></span>';
+  inner.appendChild(toggle);
+
+  const setOpen = open => {
+    links.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+
+  toggle.addEventListener('click', () => setOpen(!links.classList.contains('is-open')));
+  links.addEventListener('click', e => { if (e.target.closest('.nav-link')) setOpen(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 768) setOpen(false); });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMobileNav);
+} else {
+  initMobileNav();
 }
