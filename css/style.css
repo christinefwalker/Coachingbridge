@@ -15,7 +15,9 @@
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--ink); font-family: var(--ffs); -webkit-font-smoothing: antialiased; }
+html, body { overflow-x: hidden; }
+body { background: var(--bg); color: var(--ink); font-family: var(--ffs); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+img, svg { max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--accent); color: var(--white); }
 
@@ -49,6 +51,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .nav-links { display: flex; gap: 28px; }
 .nav-link { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
 .nav-link.active, .nav-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* Mobile menu toggle — hidden on desktop, layout unchanged */
+.nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; margin-right: -10px; padding: 11px; background: none; border: none; cursor: pointer; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); transition: transform 0.25s ease, opacity 0.2s ease; }
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .btn { display: inline-block; cursor: pointer; font-family: var(--ffs); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 32px; border: none; transition: opacity 0.2s; }
 .btn:hover { opacity: 0.85; }
@@ -312,14 +321,27 @@ a.project-row:hover { opacity: 0.7; }
 .lifestyle-feature-body p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
 
 @media (max-width: 768px) {
-  .hero-assess { padding: 100px 20px 60px; }
+  .hero-assess { padding: 100px 20px 60px; min-height: 100svh; }
   .assess-card { padding: 28px; }
   .assess-progress { margin: -28px -28px 28px; }
 }
 
 @media (max-width: 768px) {
-  .nav-links { gap: 16px; }
-  .nav-link { font-size: 11px; }
+  /* Mobile navigation: hamburger + full-width dropdown panel */
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: absolute; top: 64px; left: 0; right: 0;
+    flex-direction: column; gap: 0; align-items: stretch;
+    background: rgba(245,242,237,0.98); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 24px 16px;
+    display: none;
+  }
+  .nav-links.is-open { display: flex; }
+  .nav-link { font-size: 13px; padding: 16px 2px; border-bottom: 1px solid var(--border); }
+  .nav-link:last-child { border-bottom: none; }
+  .nav-link.active, .nav-link:hover { border-bottom-color: var(--border); }
+
   .cc-grid { grid-template-columns: 1fr; }
   .hero { padding: 0 20px 60px; }
   .section { padding: 64px 20px; }
@@ -332,4 +354,21 @@ a.project-row:hover { opacity: 0.7; }
   .offers-grid { grid-template-columns: 1fr; }
   .cred-row { flex-direction: column; gap: 20px; }
   .lifestyle-feature { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 480px) {
+  .assess-card { padding: 22px; }
+  .assess-progress { margin: -22px -22px 24px; }
+  .section { padding: 52px 18px; }
+  .page-hero { padding: 120px 18px 60px; }
+  .section-header { flex-direction: column; gap: 8px; margin-bottom: 40px; }
+  .btn-row { flex-direction: column; }
+  .btn-row .btn { width: 100%; text-align: center; }
+  .newsletter-form { flex-direction: column; gap: 12px; }
+  .nl-input { border-right: 1px solid rgba(255,255,255,0.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
